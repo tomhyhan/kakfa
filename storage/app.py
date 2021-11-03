@@ -160,3 +160,4 @@ if __name__ == "__main__":
     logger.info(
         f"Connecting to DB, Hostname: {app_config['datastore']['hostname']}, Port: {app_config['datastore']['port']}")
     app.run(port=8090)
+

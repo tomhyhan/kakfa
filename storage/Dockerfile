@@ -1,9 +1,9 @@
 FROM ubuntu:18.04
 
-LABEL maintainer="hhungmin@bcit.ca"
+LABEL maintainer="hhyungmin@my.bcit.ca"
 
 RUN apt-get update -y && \
-    apt-get install -y python3 python3-pip
+    apt-get install python3 python3-pip -y
 
 # We copy just the requirements.txt first to leverage Docker cache
 COPY ./requirements.txt /app/requirements.txt
