@@ -1,5 +1,4 @@
 events:
-  hostname: tom6.westus2.cloudapp.azure.com
+  hostname: temp6.eastus.cloudapp.azure.com
   port: 9092
   topic: events
-
