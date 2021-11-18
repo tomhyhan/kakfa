@@ -38,7 +38,8 @@ class CreateKafka:
         current_retry_count = 0
         retry_count = app_config["retries"]["number"]
         sleep_time = app_config["retries"]["sleep"]
-        while isConnected or current_retry_count < retry_count:
+
+        while not isConnected or current_retry_count < retry_count:
             try:
                 logger.info(
                     f"Try Connecting to Kafka... number of tries: {current_retry_count}")
@@ -71,6 +72,7 @@ k_hostname = app_config['events']['hostname']
 k_port = app_config['events']['port']
 k_topic = app_config['events']['topic']
 kafka = CreateKafka(k_hostname, k_port, k_topic)
+print(app_config["retries"]["number"])
 
 
 def deliver_order_tracking(body):

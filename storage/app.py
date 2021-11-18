@@ -134,7 +134,7 @@ def process_messages():
     current_retry_count = 0
     retry_count = app_config["retries"]["number"]
     sleep_time = app_config["retries"]["sleep"]
-    while isConnected or current_retry_count < retry_count:
+    while not isConnected or current_retry_count < retry_count:
         try:
             logger.info(
                 f"Try Connecting to Kafka... number of tries: {current_retry_count}")
