@@ -26,9 +26,10 @@ import sys
 
 
 class CreateKafka:
-    def __init__(self, kafka_hostname, kafka_port):
+    def __init__(self, kafka_hostname, kafka_port, kafka_topic):
         self._kafka_hostname = kafka_hostname
         self._kafka_port = kafka_port
+        self._k_topic = kafka_topic
 
     @property
     def topic(self):
@@ -52,7 +53,7 @@ class CreateKafka:
         if not isConnected:
             logger.critical("CANNOT CONNECT TO KAFKA. EXITING...")
             sys.exit(0)
-        topic = client.topics[str.encode(self._kafka_port)]
+        topic = client.topics[str.encode(self._k_topic)]
         return topic
 
 
