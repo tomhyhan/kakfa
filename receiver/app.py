@@ -21,6 +21,40 @@ import logging.config
 from datetime import datetime
 import json
 from pykafka import KafkaClient
+import time
+import sys
+
+
+class CreateKafka:
+    def __init__(self, kafka_hostname, kafka_port):
+        self._kafka_hostname = kafka_hostname
+        self._kafka_port = kafka_port
+
+    @property
+    def topic(self):
+        client = None
+        isConnected = False
+        current_retry_count = 0
+        retry_count = app_config["retries"]["number"]
+        sleep_time = app_config["retries"]["sleep"]
+        while isConnected or current_retry_count < retry_count:
+            try:
+                logger.info(
+                    f"Try Connecting to Kafka... number of tries: {current_retry_count}")
+                client = KafkaClient(
+                    hosts=f"{self._kafka_hostname}:{self._kafka_port}")
+                isConnected = True
+            except Exception as err:
+                if err:
+                    logger.error("CONNECTION FAILED")
+                    time.sleep(sleep_time)
+                    current_retry_count += 1
+        if not isConnected:
+            logger.critical("CANNOT CONNECT TO KAFKA. EXITING...")
+            sys.exit(0)
+        topic = client.topics[str.encode(self._kafka_port)]
+        return topic
+
 
 with open('./app_conf.yml', 'r') as f:
     app_config = yaml.safe_load(f.read())
@@ -43,10 +77,7 @@ def deliver_order_tracking(body):
     # response = requests.post(app_config['eventstore1']['url'],
     #                          json=body, headers=headers)
 
-    client = KafkaClient(
-        hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
-    topic = client.topics[str.encode(app_config['events']['topic'])]
-    producer = topic.get_sync_producer()
+    producer = kafka.topic.get_sync_producer()
     msg = {"type": "delivery_order",
            "datetime":
            datetime.now().strftime(
@@ -70,10 +101,10 @@ def pickup_order_tracking(body):
     # response = requests.post(app_config['eventstore2']['url'],
     #                          json=body, headers=headers)
 
-    client = KafkaClient(
-        hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
-    topic = client.topics[str.encode(app_config['events']['topic'])]
-    producer = topic.get_sync_producer()
+    # client = KafkaClient(
+    #     hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
+    # topic = client.topics[str.encode(app_config['events']['topic'])]
+    producer = kafka.topic.get_sync_producer()
     msg = {"type": "pickup_order",
            "datetime":
            datetime.now().strftime(
@@ -93,5 +124,8 @@ app.add_api("openapi.yaml",
             validate_responses=True)
 
 if __name__ == "__main__":
-    app.run(port=8080, debug=True)
-
+    app.run(port=8080)
+    k_hostname = app_config['events']['hostname']
+    k_port = app_config['events']['port']
+    k_topic = app_config['events']['topic']
+    kafka = CreateKafka(k_hostname, k_port, k_topic)
