@@ -39,7 +39,7 @@ class CreateKafka:
         retry_count = app_config["retries"]["number"]
         sleep_time = app_config["retries"]["sleep"]
 
-        while not isConnected or current_retry_count < retry_count:
+        while not isConnected and current_retry_count < retry_count:
             try:
                 logger.info(
                     f"Try Connecting to Kafka... number of tries: {current_retry_count}")
