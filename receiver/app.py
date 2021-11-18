@@ -66,6 +66,11 @@ with open('./log_conf.yml', 'r') as f:
 
 logger = logging.getLogger('basicLogger')
 
+k_hostname = app_config['events']['hostname']
+k_port = app_config['events']['port']
+k_topic = app_config['events']['topic']
+kafka = CreateKafka(k_hostname, k_port, k_topic)
+
 
 def deliver_order_tracking(body):
     """ Receives a delivery order """
@@ -125,7 +130,3 @@ app.add_api("openapi.yaml",
 
 if __name__ == "__main__":
     app.run(port=8080)
-    k_hostname = app_config['events']['hostname']
-    k_port = app_config['events']['port']
-    k_topic = app_config['events']['topic']
-    kafka = CreateKafka(k_hostname, k_port, k_topic)
