@@ -81,6 +81,7 @@ k_hostname = app_config['events']['hostname']
 k_port = app_config['events']['port']
 k_topic = app_config['events']['topic']
 kafka = CreateKafka(k_hostname, k_port, k_topic)
+producer = kafka.topic.get_sync_producer()
 
 logger.info("App Conf File: %s" % app_conf_file)
 logger.info("Log Conf File: %s" % log_conf_file)
@@ -96,7 +97,6 @@ def deliver_order_tracking(body):
     # response = requests.post(app_config['eventstore1']['url'],
     #                          json=body, headers=headers)
 
-    producer = kafka.topic.get_sync_producer()
     msg = {"type": "delivery_order",
            "datetime":
            datetime.now().strftime(
@@ -123,7 +123,6 @@ def pickup_order_tracking(body):
     # client = KafkaClient(
     #     hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
     # topic = client.topics[str.encode(app_config['events']['topic'])]
-    producer = kafka.topic.get_sync_producer()
     msg = {"type": "pickup_order",
            "datetime":
            datetime.now().strftime(
