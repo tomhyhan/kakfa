@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-LABEL maintainer="hhyungmin@bcit.ca"
+LABEL maintainer="hhyungmin@my.bcit.ca"
 
 RUN apt-get update -y && \
     apt-get install -y python3 python3-pip

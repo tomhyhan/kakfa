@@ -50,7 +50,7 @@ export default function AppStats() {
               </td>
             </tr>
             <tr>
-              <td colspan='2'>Drivers: {stats['num_drivers']}</td>
+              <td colspan='2'>Drivers: {stats['num_drivers'].map(driver=>driver)}</td>
             </tr>
           </tbody>
         </table>
