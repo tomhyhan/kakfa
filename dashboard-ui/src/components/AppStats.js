@@ -7,7 +7,7 @@ export default function AppStats() {
   const [error, setError] = useState(null);
 
   const getStats = () => {
-    fetch(`http://temp6.eastus.cloudapp.azure.com:8100/stats`)
+    fetch(`http://temp6.eastus.cloudapp.azure.com/processing/stats`)
       .then((res) => res.json())
       .then(
         (result) => {
@@ -50,7 +50,9 @@ export default function AppStats() {
               </td>
             </tr>
             <tr>
-              <td colspan='2'>Drivers: {stats['num_drivers'].map(driver=>driver)}</td>
+              <td colspan='2'>
+                Drivers: {stats['num_drivers'].map((driver) => driver)}
+              </td>
             </tr>
           </tbody>
         </table>
