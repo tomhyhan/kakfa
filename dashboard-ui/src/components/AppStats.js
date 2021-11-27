@@ -51,7 +51,7 @@ export default function AppStats() {
             </tr>
             <tr>
               <td colspan='2'>
-                Drivers:{' '}
+                Drivers:
                 {stats['num_drivers'] &&
                   stats['num_drivers'].map((driver) => {
                     return <p>name: {driver} </p>;
