@@ -14,17 +14,31 @@ import json
 from pykafka import KafkaClient
 from pykafka.common import OffsetType
 from threading import Thread
+import time
+import sys
+import os
 
+if "TARGET_ENV" in os.environ and os.environ["TARGET_ENV"] == "test":
+    print("In Test Environment")
+    app_conf_file = "/config/app_conf.yml"
+    log_conf_file = "/config/log_conf.yml"
+else:
+    print("In Dev Environment")
+    app_conf_file = "app_conf.yml"
+    log_conf_file = "log_conf.yml"
 
-with open('./app_conf.yml', 'r') as f:
+with open(app_conf_file, 'r') as f:
     app_config = yaml.safe_load(f.read())
 
 
-with open('./log_conf.yml', 'r') as f:
+with open(log_conf_file, 'r') as f:
     log_config = yaml.safe_load(f.read())
     logging.config.dictConfig(log_config)
 
 logger = logging.getLogger('basicLogger')
+
+logger.info("App Conf File: %s" % app_conf_file)
+logger.info("Log Conf File: %s" % log_conf_file)
 
 # DB_ENGINE = create_engine("sqlite:///readings.sqlite")
 DB_ENGINE = create_engine(
@@ -120,6 +134,7 @@ def get_pickup_order_tracking(orderTime, orderTimeEnd):
 
 app = connexion.FlaskApp(__name__, specification_dir='')
 app.add_api("openapi.yml",
+            base_path="/storage",
             strict_validation=True,
             validate_responses=True)
 
@@ -128,7 +143,25 @@ def process_messages():
     """ Process event messages """
     hostname = "%s:%d" % (
         app_config["events"]["hostname"], app_config["events"]["port"])
-    client = KafkaClient(hosts=hostname)
+    client = None
+    isConnected = False
+    current_retry_count = 0
+    retry_count = app_config["retries"]["number"]
+    sleep_time = app_config["retries"]["sleep"]
+    while not isConnected and current_retry_count < retry_count:
+        try:
+            logger.info(
+                f"Try Connecting to Kafka... number of tries: {current_retry_count}")
+            client = KafkaClient(hosts=hostname)
+            isConnected = True
+        except Exception as err:
+            if err:
+                logger.error("CONNECTION FAILED")
+                time.sleep(sleep_time)
+                current_retry_count += 1
+    if not isConnected:
+        logger.critical("CANNOT CONNECT TO KAFKA. EXITING...")
+        sys.exit(0)
     topic = client.topics[str.encode(app_config["events"]["topic"])]
 
     # Create a consume on a consumer group, that only reads new messages
@@ -160,4 +193,3 @@ if __name__ == "__main__":
     logger.info(
         f"Connecting to DB, Hostname: {app_config['datastore']['hostname']}, Port: {app_config['datastore']['port']}")
     app.run(port=8090)
-
