@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 // a
-=======
-// add
->>>>>>> lab9
 pipeline {
     agent any
 
