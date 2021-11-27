@@ -1,9 +1,4 @@
-// 1. Python Lint
-// 2. package => docker image and push it to the docker hub
-// 3. stage of my choice
-
-// docker-compose file => image from docker hub account
-// 
+// add
 pipeline {
     agent any
 
