@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Python Lint') {
             steps {
-                sh 'pylint-fail-under --fail_under 5.0 storage/*.py'
+                sh 'pylint-fail-under --fail_under 5.0 storage/app.py'
             }
         }
         // stage('Package') {
