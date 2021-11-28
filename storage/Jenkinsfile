@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'pwd'
+                sh 'cd storage'
                 sh 'pip install -r requirements.txt'
             }
         }
