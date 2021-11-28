@@ -7,7 +7,7 @@ export default function AppStats() {
   const [error, setError] = useState(null);
 
   const getStats = () => {
-    fetch(`http://temp6.eastus.cloudapp.azure.com/processing/stats`)
+    fetch(`http://temp66.eastus.cloudapp.azure.com/processing/stats`)
       .then((res) => res.json())
       .then(
         (result) => {

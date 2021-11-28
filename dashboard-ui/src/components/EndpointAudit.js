@@ -10,7 +10,7 @@ export default function EndpointAudit(props) {
 
   const getAudit = () => {
     fetch(
-      `http://temp6.eastus.cloudapp.azure.com/audit_log/orders/${props.endpoint}?index=${rand_val}`
+      `http://temp66.eastus.cloudapp.azure.com/audit_log/orders/${props.endpoint}?index=${rand_val}`
     )
       .then((res) => res.json())
       .then(
