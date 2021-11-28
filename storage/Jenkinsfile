@@ -1,22 +1,27 @@
-// addd
+// Python Lint
+// package - docker
 pipeline {
     agent any
 
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh 'pip install -r requirements.txt'
             }
         }
-        stage('Test') {
+        stage('Python Lint') {
             steps {
-                echo 'Testing..'
+                sh 'pylint-fail-under --fail_under 5.0 *.py'
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+        // stage('Package') {
+        //     steps {
+        //         withCredentials([string(credentialsId: 'DockerHub', variable: 'TOKEN')]) {
+        //             sh "docker login -u tomhyhan -p '$TOKEN' docker.io"
+        //             sh "docker build -t ${dockerRepoName}:latest --tag tomhyhan/${dockerRepoName}:${imageName} ."
+        //             sh "docker push tomhyhan/${dockerRepoName}:${imageName}"
+        //         }
+        //     }
+        // }
     }
 }
