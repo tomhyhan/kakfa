@@ -1,4 +1,4 @@
-// Python Linta
+// Python Lintaa
 // package - docker
 @Library('ci_functions@main')_
 python_build('storage','storageapp','storage')
