@@ -1,8 +1,7 @@
 version: 1
 eventstore:
-  url: http://localhost:8090
+  url: http://temp66.eastus.cloudapp.azure.com/storage
 datastore:
-  filename: events.json
+  filename: /data/events.json
 scheduler:
   period_sec: 5
-
