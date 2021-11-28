@@ -1,5 +1,5 @@
 import mysql.connector
-db_conn = mysql.connector.connect(host="tom6.westus2.cloudapp.azure.com", user="azureuser",
+db_conn = mysql.connector.connect(host="temp6.eastus.cloudapp.azure.com", user="azureuser",
                                   password="bbb", database="events")
 db_cursor = db_conn.cursor()
 
