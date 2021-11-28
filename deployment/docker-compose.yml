@@ -51,7 +51,7 @@ services:
     # Names our volume
 
   receiver:
-    image: receiver
+    image: tomhyhan/receiver:receiverapp
     ports:
       - '8080'
     networks:
@@ -65,7 +65,7 @@ services:
       - 'kafka'
 
   storage:
-    image: storage
+    image: tomhyhan/storage:storageapp
     ports:
       - '8090'
     networks:
@@ -80,7 +80,7 @@ services:
       - 'db'
 
   processing:
-    image: processing
+    image: tomhyhan/processing:processingapp
     ports:
       - "8100"
     networks:
@@ -95,7 +95,7 @@ services:
       - 'storage'
 
   audit_log:
-    image: audit_log
+    image: tomhyhan/audit_log:audit_logapp
     ports:
       - '8110'
     networks:
