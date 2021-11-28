@@ -1,4 +1,4 @@
 // Python Linta
 // package - docker
-@Library('ci-shared@main')_
+@Library('ci_functions@main')_
 python_build('storage','storageapp','storage')
