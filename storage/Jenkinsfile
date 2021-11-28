@@ -2,18 +2,17 @@
 // package - docker
 pipeline {
     agent any
-
     stages {
         stage('Build') {
             steps {
                 sh 'pip install -r storage/requirements.txt'
             }
         }
-        stage('Python Lint') {
-            steps {
-                sh 'pylint-fail-under --fail_under 5.0 storage/app.py'
-            }
-        }
+        // stage('Python Lint') {
+        //     steps {
+        //         sh 'pylint-fail-under --fail_under 5.0 storage/app.py'
+        //     }
+        // }
         // stage('Package') {
         //     steps {
         //         withCredentials([string(credentialsId: 'DockerHub', variable: 'TOKEN')]) {
