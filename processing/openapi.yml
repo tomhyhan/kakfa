@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  description: This API provides event stats
+  version: '1.0.0'
+  title: Stats API
+  contact:
+    email: hhyungmin@my.bcit.ca
+
+paths:
+  /stats:
+    get:
+      summary: Gets the event stats
+      operationId: app.get_stats
+      description: Gets delivery order and pickup order processsed statistics
+      responses:
+        '200':
+          description: Successfully returned a list of delivery orders and pickup orders
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/ReadingStats'
+
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+components:
+  schemas:
+    ReadingStats:
+      required:
+        - num_delivery_orders
+        - num_pickup_orders
+        - max_total
+        - num_drivers
+        - last_updated
+      properties:
+        num_delivery_orders:
+          type: integer
+          example: 500
+        num_pickup_orders:
+          type: integer
+          example: 200
+        max_total:
+          type: integer
+          example: 10000
+        num_drivers:
+          type: integer
+          example: 500000
+        last_updated:
+          type: string
+          format: date-time
+          example: '2018-11-18 09:32:36.435350'
+      type: object

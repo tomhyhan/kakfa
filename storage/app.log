@@ -1,0 +1,18 @@
+2021-11-03 21:12:46,923 - basicLogger - INFO - Connecting to DB, Hostname: temp6.eastus.cloudapp.azure.com, Port: 3306
+2021-11-03 21:12:54,470 - basicLogger - INFO - Connecting to DB, Hostname: temp6.eastus.cloudapp.azure.com, Port: 3306
+2021-11-03 21:13:01,986 - basicLogger - INFO - Message: {'type': 'delivery_order', 'datetime': '2021-11-03 21:13:01', 'payload': {'deliveryOrderInfo': {'address': '555 Seymour St', 'driverName': 'Tom', 'remainingTime': 20}, 'id': 'd290f1ee-6c54-4b01-90e6-d701748f0851', 'items': 'noodle, rice', 'orderTime': '2021-08-29T09:12:33.001Z', 'total': 15.32}}
+2021-11-03 21:13:02,073 - basicLogger - DEBUG - Returned event Delivery d290f1ee-6c54-4b01-90e6-d701748f0851
+2021-11-03 21:17:58,099 - basicLogger - INFO - Connecting to DB, Hostname: temp6.eastus.cloudapp.azure.com, Port: 3306
+2021-11-03 21:18:00,660 - basicLogger - INFO - Message: {'type': 'delivery_order', 'datetime': '2021-11-03 21:18:00', 'payload': {'deliveryOrderInfo': {'address': '555 Seymour St', 'driverName': 'Tom', 'remainingTime': 20}, 'id': 'd290f1ee-6c54-4b01-90e6-d701748f0851', 'items': 'noodle, rice', 'orderTime': '2021-08-29T09:12:33.001Z', 'total': 15.32}}
+2021-11-03 21:18:00,721 - basicLogger - DEBUG - Returned event Delivery d290f1ee-6c54-4b01-90e6-d701748f0851
+2021-11-04 18:07:39,584 - basicLogger - INFO - Connecting to DB, Hostname: temp6.eastus.cloudapp.azure.com, Port: 3306
+2021-11-04 18:07:40,022 - basicLogger - INFO - Query for delivery orders after 2021-11-04 18:02:49 returns 0 results
+2021-11-04 18:07:40,034 - basicLogger - INFO - Query for pickup orders after 2021-11-04 18:02:49 returns 0 results
+2021-11-04 18:07:44,979 - basicLogger - INFO - Query for delivery orders after 2021-11-04 18:07:39 returns 0 results
+2021-11-04 18:07:44,989 - basicLogger - INFO - Query for pickup orders after 2021-11-04 18:07:39 returns 0 results
+2021-11-04 18:07:49,979 - basicLogger - INFO - Query for delivery orders after 2021-11-04 18:07:44 returns 0 results
+2021-11-04 18:07:49,989 - basicLogger - INFO - Query for pickup orders after 2021-11-04 18:07:44 returns 0 results
+2021-11-04 18:07:53,279 - basicLogger - INFO - Message: {'type': 'delivery_order', 'datetime': '2021-11-04 18:07:53', 'payload': {'deliveryOrderInfo': {'address': '555 Seymour St', 'driverName': 'Tom', 'remainingTime': 20}, 'id': 'd290f1ee-6c54-4b01-90e6-d701748f0851', 'items': 'noodle, rice', 'orderTime': '2021-08-29T09:12:33.001Z', 'total': 15.32}}
+2021-11-04 18:07:53,352 - basicLogger - DEBUG - Returned event Delivery d290f1ee-6c54-4b01-90e6-d701748f0851
+2021-11-04 18:07:54,979 - basicLogger - INFO - Query for delivery orders after 2021-11-04 18:07:49 returns 1 results
+2021-11-04 18:07:54,990 - basicLogger - INFO - Query for pickup orders after 2021-11-04 18:07:49 returns 0 results

@@ -1,0 +1,14 @@
+version: 1
+
+datastore:
+  user: azureuser
+  password: 'bbb'
+  hostname: localhost
+  port: 3306
+  db: events
+
+events:
+  hostname: localhost
+  port: 9092
+  topic: events
+
