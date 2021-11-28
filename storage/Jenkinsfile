@@ -2,7 +2,7 @@
 // package - docker
 pipeline {
     agent any
-    
+
     stages {
         stage('Build') {
             steps {
@@ -13,7 +13,7 @@ pipeline {
         stage('Python Lint') {
             steps {
                 echo "hello"
-                // sh 'pylint-fail-under --fail_under 5.0 storage/app.py'
+                sh 'pylint-fail-under --fail_under 5.0 storage/app.py'
             }
         }
         // stage('Package') {
