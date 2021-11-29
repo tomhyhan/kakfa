@@ -75,6 +75,7 @@ def populate_stats():
     """ Periodically update stats """
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     logger.info("Start Periodic Processing")
+    logger.info("testing loggin")
     if (os.path.isfile(app_config['datastore']['filename'])):
         with open(app_config['datastore']['filename']) as f:
             data = f.read()
